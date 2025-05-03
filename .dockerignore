@@ -21,5 +21,4 @@ Thumbs.db
 .gitignore
 
 # Miljöfiler
-.env
 /src/main/resources/.env
