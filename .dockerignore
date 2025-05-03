@@ -1,0 +1,25 @@
+# Byggmappar
+/build
+/target
+/out
+
+# Gradle-cache
+.gradle
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE-filer
+*.iml
+.idea/
+*.swp
+
+# OS-filer
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Miljöfiler
+.env
+/src/main/resources/.env

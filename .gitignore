@@ -38,3 +38,4 @@ out/
 ### Enviorment ###
 /src/main/resources/.env
 curl-test-txt
+### /src/main/resources/application.properties ###
