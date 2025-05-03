@@ -1,11 +1,9 @@
-FROM eclipse-temurin:24
-
-LABEL authors="linde"
-
+FROM eclipse-temurin:24-jdk-alpine AS builder
 WORKDIR /app
+COPY . .
+RUN ./gradlew bootJar
 
-COPY build/libs/app.jar app.jar
-
-EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=${PORT:-8080}"]
+FROM eclipse-temurin:24-jdk-alpine
+WORKDIR /app
+COPY --from=builder /app/build/libs/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
