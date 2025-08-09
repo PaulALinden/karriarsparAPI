@@ -41,5 +41,6 @@ out/
 .vscode/
 ### Enviorment ###
 /src/main/resources/.env
+/src/main/resources/.env.test
 curl-test-txt
 ### /src/main/resources/application.properties ###
