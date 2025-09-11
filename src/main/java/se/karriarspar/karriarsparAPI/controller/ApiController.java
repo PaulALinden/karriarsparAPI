@@ -9,11 +9,15 @@ import se.karriarspar.karriarsparAPI.service.GeminiAIService;
 @RequestMapping("/api")
 public class ApiController {
 
-    @Autowired
-    private GeminiAIService geminiAIService;
+    private final GeminiAIService geminiAIService;
+
+    ApiController(GeminiAIService geminiAIService){
+        this.geminiAIService = geminiAIService;
+    }
 
     @PostMapping("/chat")
     public ResponseEntity<String> getResponseFromGemini(@RequestBody String message) {
+
         String response = geminiAIService.callGeminiAPI(message);
         return ResponseEntity.ok(response);
     }
