@@ -12,7 +12,7 @@ import se.karriarspar.karriarsparAPI.dto.Part;
 import se.karriarspar.karriarsparAPI.dto.Prompt;
 
 import java.util.List;
-
+//Service
 @Service
 public class GeminiAIService {
 
@@ -31,25 +31,21 @@ public class GeminiAIService {
     }
 
     public String callGeminiAPI(String userInput) {
-        // Kombinera förutbestämd prompt med användarens text
+
         String fullPrompt = PREDEFINED_PROMPT + userInput;
 
-        // Skapa prompt-objektet
         Prompt prompt = new Prompt();
         Content content = new Content();
         Part part = new Part();
-        part.setText(fullPrompt); // Använd den kombinerade texten
+        part.setText(fullPrompt);
         content.setParts(List.of(part));
         prompt.setContents(List.of(content));
 
-        // Sätt upp headers
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
 
-        // Skapa HTTP-förfrågan
         HttpEntity<Prompt> requestEntity = new HttpEntity<>(prompt, headers);
 
-        // Gör anrop till Gemini API
         String urlWithKey = apiUrl + "?key=" + apiKey;
         ResponseEntity<String> response = restTemplate.exchange(
                 urlWithKey,
