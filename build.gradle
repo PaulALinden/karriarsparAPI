@@ -24,16 +24,34 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "org.mockito:mockito-core:5.+"
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 }
+
+test {
+	useJUnitPlatform()
+
+	doFirst {
+		// Hitta jar-filen för byte-buddy-agent i test-runtime
+		def agentJar = configurations.testRuntimeClasspath.files
+				.find { it.name.contains("byte-buddy-agent") }
+
+		if (agentJar) {
+			jvmArgs "-javaagent:${agentJar.absolutePath}"
+		}
+	}
+}
+
 
 bootJar {
 	archiveFileName = "app.jar" // valfritt namn
 	launchScript() // gör .jar körbar i t.ex. Linux-miljö
 }
+
 
 
